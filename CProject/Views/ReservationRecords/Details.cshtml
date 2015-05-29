@@ -1,0 +1,50 @@
+﻿@model CProject.Models.ReservationRecord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReservationRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservationTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservationTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TakeTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TakeTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LendingCode.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LendingCode.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reader.ReaderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reader.ReaderName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationRecordID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

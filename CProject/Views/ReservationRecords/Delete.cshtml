@@ -1,0 +1,56 @@
+﻿@model CProject.Models.ReservationRecord
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ReservationRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservationTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservationTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TakeTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TakeTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LendingCode.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LendingCode.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reader.ReaderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reader.ReaderName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

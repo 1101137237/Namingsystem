@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CProject.Models.ReparationRecord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReparationReason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReparationMoney)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LendingRecord.LendingRecordID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReparationReason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReparationMoney)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LendingRecord.LendingRecordID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReparationRecordID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReparationRecordID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReparationRecordID })
+        </td>
+    </tr>
+}
+
+</table>

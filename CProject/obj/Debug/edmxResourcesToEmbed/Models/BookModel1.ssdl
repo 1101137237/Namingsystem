@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppointmentViolation">
+    <Key>
+      <PropertyRef Name="AppointmentViolationID" />
+    </Key>
+    <Property Name="AppointmentViolationID" Type="int" Nullable="false" />
+    <Property Name="NoTakeNumber" Type="int" />
+    <Property Name="SuspendedDate" Type="date" />
+    <Property Name="ReservationRecordID" Type="int" />
+  </EntityType>
+  <EntityType Name="BookType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="10" />
+    <Property Name="Fine" Type="int" />
+    <Property Name="LendingRule" Type="varchar" MaxLength="50" />
+    <Property Name="ReparationRule" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Classification">
+    <Key>
+      <PropertyRef Name="ClassificationID" />
+    </Key>
+    <Property Name="ClassificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassificationName" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="LendingCode">
+    <Key>
+      <PropertyRef Name="LendingCodeID" />
+    </Key>
+    <Property Name="LendingCodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LibraryID" Type="int" />
+    <Property Name="LibraryBookID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="LendingRecord">
+    <Key>
+      <PropertyRef Name="LendingRecordID" />
+    </Key>
+    <Property Name="LendingRecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LendingTime" Type="date" />
+    <Property Name="ReturnTime" Type="date" />
+    <Property Name="ExpectedReturnTime" Type="date" />
+    <Property Name="NumberOfTime" Type="int" />
+    <Property Name="LibraryCardID" Type="int" />
+    <Property Name="LendingCodeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Library">
+    <Key>
+      <PropertyRef Name="LibraryID" />
+    </Key>
+    <Property Name="LibraryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LibraryName" Type="varchar" MaxLength="15" />
+    <Property Name="LibraryAddress" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="LibraryBook">
+    <Key>
+      <PropertyRef Name="LibraryBookID" />
+    </Key>
+    <Property Name="LibraryBookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="varchar" MaxLength="10" />
+    <Property Name="BookAuthor" Type="varchar" MaxLength="10" />
+    <Property Name="BookPress" Type="varchar" MaxLength="10" />
+    <Property Name="ISBN" Type="int" />
+    <Property Name="Page" Type="int" />
+    <Property Name="ClassificationID" Type="int" />
+    <Property Name="TypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="LibraryCard">
+    <Key>
+      <PropertyRef Name="LibraryCardID" />
+    </Key>
+    <Property Name="LibraryCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateLicensing" Type="date" />
+    <Property Name="CancellationDate" Type="date" />
+    <Property Name="ReaderID" Type="int" />
+  </EntityType>
+  <EntityType Name="Reader">
+    <Key>
+      <PropertyRef Name="ReaderID" />
+    </Key>
+    <Property Name="ReaderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReaderName" Type="varchar" MaxLength="8" />
+    <Property Name="ReaderBirthday" Type="date" />
+    <Property Name="ReaderAddress" Type="varchar" MaxLength="100" />
+    <Property Name="ReaderSex" Type="varchar" MaxLength="2" />
+    <Property Name="ReaderPhone" Type="int" />
+    <Property Name="ReaderEmail" Type="varchar" MaxLength="100" />
+    <Property Name="ReaderAccount" Type="varchar" MaxLength="50" />
+    <Property Name="ReaderPassword" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ReparationRecord">
+    <Key>
+      <PropertyRef Name="ReparationRecordID" />
+    </Key>
+    <Property Name="ReparationRecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReparationReason" Type="varchar" MaxLength="100" />
+    <Property Name="ReparationMoney" Type="int" />
+    <Property Name="PayTime" Type="date" />
+    <Property Name="LendingRecordID" Type="int" />
+  </EntityType>
+  <EntityType Name="ReservationRecord">
+    <Key>
+      <PropertyRef Name="ReservationRecordID" />
+    </Key>
+    <Property Name="ReservationRecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationTime" Type="date" />
+    <Property Name="TakeTime" Type="date" />
+    <Property Name="LendingCodeID" Type="int" Nullable="false" />
+    <Property Name="ReaderID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="ViolationRecord">
+    <Key>
+      <PropertyRef Name="ViolationID" />
+    </Key>
+    <Property Name="ViolationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViolationDay" Type="int" />
+    <Property Name="Violationdate" Type="date" />
+    <Property Name="LendingRecordID" Type="int" />
+  </EntityType>
+  <Association Name="ClassificationID">
+    <End Role="Classification" Type="Self.Classification" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classification">
+        <PropertyRef Name="ClassificationID" />
+      </Principal>
+      <Dependent Role="LibraryBook">
+        <PropertyRef Name="ClassificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReparationRecord_LendingRecord">
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="0..1" />
+    <End Role="ReparationRecord" Type="Self.ReparationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Principal>
+      <Dependent Role="ReparationRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationRecord_LendingCode">
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="1" />
+    <End Role="ReservationRecord" Type="Self.ReservationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingCode">
+        <PropertyRef Name="LendingCodeID" />
+      </Principal>
+      <Dependent Role="ReservationRecord">
+        <PropertyRef Name="LendingCodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationRecord_Reader1">
+    <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+    <End Role="ReservationRecord" Type="Self.ReservationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reader">
+        <PropertyRef Name="ReaderID" />
+      </Principal>
+      <Dependent Role="ReservationRecord">
+        <PropertyRef Name="ReaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LendingCodeID">
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingCode">
+        <PropertyRef Name="LendingCodeID" />
+      </Principal>
+      <Dependent Role="LendingRecord">
+        <PropertyRef Name="LendingCodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LendingRecordID">
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ViolationRecord" Type="Self.ViolationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Principal>
+      <Dependent Role="ViolationRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryBookID">
+    <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LibraryBook">
+        <PropertyRef Name="LibraryBookID" />
+      </Principal>
+      <Dependent Role="LendingCode">
+        <PropertyRef Name="LibraryBookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryCardID">
+    <End Role="LibraryCard" Type="Self.LibraryCard" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LibraryCard">
+        <PropertyRef Name="LibraryCardID" />
+      </Principal>
+      <Dependent Role="LendingRecord">
+        <PropertyRef Name="LibraryCardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryID">
+    <End Role="Library" Type="Self.Library" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Library">
+        <PropertyRef Name="LibraryID" />
+      </Principal>
+      <Dependent Role="LendingCode">
+        <PropertyRef Name="LibraryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReaderID">
+    <End Role="Reader" Type="Self.Reader" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LibraryCard" Type="Self.LibraryCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reader">
+        <PropertyRef Name="ReaderID" />
+      </Principal>
+      <Dependent Role="LibraryCard">
+        <PropertyRef Name="ReaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReservationRecordID">
+    <End Role="ReservationRecord" Type="Self.ReservationRecord" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AppointmentViolation" Type="Self.AppointmentViolation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservationRecord">
+        <PropertyRef Name="ReservationRecordID" />
+      </Principal>
+      <Dependent Role="AppointmentViolation">
+        <PropertyRef Name="ReservationRecordID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TypeID">
+    <End Role="BookType" Type="Self.BookType" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="LibraryBook">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="AppointmentViolation" EntityType="Self.AppointmentViolation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookType" EntityType="Self.BookType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LendingCode" EntityType="Self.LendingCode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LendingRecord" EntityType="Self.LendingRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Library" EntityType="Self.Library" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LibraryBook" EntityType="Self.LibraryBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LibraryCard" EntityType="Self.LibraryCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reader" EntityType="Self.Reader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReparationRecord" EntityType="Self.ReparationRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReservationRecord" EntityType="Self.ReservationRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ViolationRecord" EntityType="Self.ViolationRecord" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="ClassificationID" Association="Self.ClassificationID">
+      <End Role="Classification" EntitySet="Classification" />
+      <End Role="LibraryBook" EntitySet="LibraryBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReparationRecord_LendingRecord" Association="Self.FK_ReparationRecord_LendingRecord">
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+      <End Role="ReparationRecord" EntitySet="ReparationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationRecord_LendingCode" Association="Self.FK_ReservationRecord_LendingCode">
+      <End Role="LendingCode" EntitySet="LendingCode" />
+      <End Role="ReservationRecord" EntitySet="ReservationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationRecord_Reader1" Association="Self.FK_ReservationRecord_Reader1">
+      <End Role="Reader" EntitySet="Reader" />
+      <End Role="ReservationRecord" EntitySet="ReservationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LendingCodeID" Association="Self.LendingCodeID">
+      <End Role="LendingCode" EntitySet="LendingCode" />
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LendingRecordID" Association="Self.LendingRecordID">
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+      <End Role="ViolationRecord" EntitySet="ViolationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryBookID" Association="Self.LibraryBookID">
+      <End Role="LibraryBook" EntitySet="LibraryBook" />
+      <End Role="LendingCode" EntitySet="LendingCode" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryCardID" Association="Self.LibraryCardID">
+      <End Role="LibraryCard" EntitySet="LibraryCard" />
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryID" Association="Self.LibraryID">
+      <End Role="Library" EntitySet="Library" />
+      <End Role="LendingCode" EntitySet="LendingCode" />
+    </AssociationSet>
+    <AssociationSet Name="ReaderID" Association="Self.ReaderID">
+      <End Role="Reader" EntitySet="Reader" />
+      <End Role="LibraryCard" EntitySet="LibraryCard" />
+    </AssociationSet>
+    <AssociationSet Name="ReservationRecordID" Association="Self.ReservationRecordID">
+      <End Role="ReservationRecord" EntitySet="ReservationRecord" />
+      <End Role="AppointmentViolation" EntitySet="AppointmentViolation" />
+    </AssociationSet>
+    <AssociationSet Name="TypeID" Association="Self.TypeID">
+      <End Role="BookType" EntitySet="BookType" />
+      <End Role="LibraryBook" EntitySet="LibraryBook" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CProject.Models.LibraryBook>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookAuthor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookPress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Page)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookType.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Classification.ClassificationName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookAuthor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookPress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Page)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookType.TypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Classification.ClassificationName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LibraryBookID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LibraryBookID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LibraryBookID })
+        </td>
+    </tr>
+}
+
+</table>

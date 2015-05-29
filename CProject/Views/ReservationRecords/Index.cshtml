@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CProject.Models.ReservationRecord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReservationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TakeTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LendingCode.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reader.ReaderName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TakeTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LendingCode.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reader.ReaderName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReservationRecordID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReservationRecordID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReservationRecordID })
+        </td>
+    </tr>
+}
+
+</table>

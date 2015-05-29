@@ -1,0 +1,56 @@
+﻿@model CProject.Models.ReparationRecord
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ReparationRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReparationReason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReparationReason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReparationMoney)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReparationMoney)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LendingRecord.LendingRecordID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LendingRecord.LendingRecordID)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

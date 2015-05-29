@@ -1,0 +1,50 @@
+﻿@model CProject.Models.ReparationRecord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReparationRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReparationReason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReparationReason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReparationMoney)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReparationMoney)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LendingRecord.LendingRecordID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LendingRecord.LendingRecordID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReparationRecordID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

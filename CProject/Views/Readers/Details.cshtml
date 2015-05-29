@@ -1,0 +1,82 @@
+﻿@model CProject.Models.Reader
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reader</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderBirthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderBirthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderSex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderSex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderPassword)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReaderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

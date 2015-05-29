@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<h2>教師登入</h2>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">教師證碼</label>
+        <div class="col-md-10">
+            <input class="form-control valid" type="text" id="acc" placeholder="帳號" required/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">密碼</label>
+        <div class="col-md-10">
+            <input class="form-control valid" type="text" id="pwd" placeholder="密碼" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="登入" class="btn btn-default" id="loginbtn" />
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var accresult = null;
+        var pwdresult = null;
+        $(document).ready(function () {
+            $("#loginbtn").click(function () {
+                var acc = $("#acc").val();
+                var pwd = $("#pwd").val();
+                $.ajax({
+                    url: '/api/Login/5',
+                    type: 'GET',
+                    dataType: "json",
+                    headers: '"Content-Type", "application/json")',
+                    data: {
+                        "acc": acc,
+                        "pwd": pwd
+                    },
+                    success: logincheck,
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                function logincheck(data) {
+                    $.each(data, function (i, item) {
+                        console.log(data[i]);
+                        accresult = data[i]['ReaderAccount'];
+                        pwdresult = data[i]['ReaderPassword'];
+                    });
+                    if (acc == '' || pwd == '') {
+                        alert("帳密不可為空值");
+                    } else if (acc == 'admin' && pwd == 'admin123') {
+                        alert("admin");
+                    } else if (acc == accresult && pwd == pwdresult) {
+                        alert("登入成功");
+                        window.location.href = 'Index';
+                    } else {
+                        alert("登入失敗");
+                        window.location.reload();
+                    };
+                }
+            });
+        });
+    </script>
+}

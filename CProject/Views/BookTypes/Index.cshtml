@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CProject.Models.BookType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LendingRule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReparationRule)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LendingRule)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReparationRule)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TypeID })
+        </td>
+    </tr>
+}
+
+</table>

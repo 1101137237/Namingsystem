@@ -1,0 +1,50 @@
+﻿@model CProject.Models.BookType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LendingRule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LendingRule)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReparationRule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReparationRule)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

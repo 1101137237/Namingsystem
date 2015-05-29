@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .headimage{
+        background-image:url(../../Content/Img/images.jpg);
+    }
+    .font{
+        color:white;
+        text-align:center;
+        font-size: 2px;
+    }
+    .book{
+        width:55%;
+        height:40%;
+        margin:5px auto;
+        position: relative;
+        left: 50px;
+    }
+</style>
+
+<div class="jumbotron headimage font">
+    <h1>點名系統</h1>
+ <p class="lead font">我當你，因為你沒來 </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-xs-12 col-sm-4">
+        <img src="../../Content/Img/getImage.jpg" class="book">
+        <form action="">
+            <input type="radio" name="arrive" value="yes">出席<br>
+            <input type="radio" name="arrive" value="no">缺席<br>
+            <input type="radio" name="arrive" value="yes">請假
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-xs-12 col-sm-4">
+        <img src="../../Content/Img/getImage2.jpg" class="book">
+        <form action="">
+            <input type="radio" name="arrive" value="yes">出席<br>
+            <input type="radio" name="arrive" value="no">缺席<br>
+            <input type="radio" name="arrive" value="yes">請假
+        </form>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-4">
+            <img src="../../Content/Img/getImage3.jpg" class="book">
+            <form action="">
+                <input type="radio" name="arrive" value="yes">出席<br>
+                <input type="radio" name="arrive" value="no">缺席<br>
+                <input type="radio" name="arrive" value="yes">請假
+            </form>
+        </div>
+    </div>
+<br>
+<p>
+    <button class="btn btn-primary" type="button" onclick="alert('還沒做好')">送出</button>
+
+</p>

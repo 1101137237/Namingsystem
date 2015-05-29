@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AppointmentViolation">
+    <Key>
+      <PropertyRef Name="AppointmentViolationID" />
+    </Key>
+    <Property Name="AppointmentViolationID" Type="Int32" Nullable="false" />
+    <Property Name="NoTakeNumber" Type="Int32" />
+    <Property Name="SuspendedDate" Type="DateTime" Precision="0" />
+    <Property Name="ReservationRecordID" Type="Int32" />
+    <NavigationProperty Name="ReservationRecord" Relationship="Self.ReservationRecordID" FromRole="AppointmentViolation" ToRole="ReservationRecord" />
+  </EntityType>
+  <EntityType Name="BookType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Fine" Type="Int32" />
+    <Property Name="LendingRule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReparationRule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LibraryBook" Relationship="Self.TypeID" FromRole="BookType" ToRole="LibraryBook" />
+  </EntityType>
+  <EntityType Name="Classification">
+    <Key>
+      <PropertyRef Name="ClassificationID" />
+    </Key>
+    <Property Name="ClassificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassificationName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LibraryBook" Relationship="Self.ClassificationID" FromRole="Classification" ToRole="LibraryBook" />
+  </EntityType>
+  <EntityType Name="LendingCode">
+    <Key>
+      <PropertyRef Name="LendingCodeID" />
+    </Key>
+    <Property Name="LendingCodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LibraryID" Type="Int32" />
+    <Property Name="LibraryBookID" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ReservationRecord" Relationship="Self.FK_ReservationRecord_LendingCode" FromRole="LendingCode" ToRole="ReservationRecord" />
+    <NavigationProperty Name="LendingRecord" Relationship="Self.LendingCodeID" FromRole="LendingCode" ToRole="LendingRecord" />
+    <NavigationProperty Name="LibraryBook" Relationship="Self.LibraryBookID" FromRole="LendingCode" ToRole="LibraryBook" />
+    <NavigationProperty Name="Library" Relationship="Self.LibraryID" FromRole="LendingCode" ToRole="Library" />
+  </EntityType>
+  <EntityType Name="LendingRecord">
+    <Key>
+      <PropertyRef Name="LendingRecordID" />
+    </Key>
+    <Property Name="LendingRecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LendingTime" Type="DateTime" Precision="0" />
+    <Property Name="ReturnTime" Type="DateTime" Precision="0" />
+    <Property Name="ExpectedReturnTime" Type="DateTime" Precision="0" />
+    <Property Name="NumberOfTime" Type="Int32" />
+    <Property Name="LibraryCardID" Type="Int32" />
+    <Property Name="LendingCodeID" Type="Int32" />
+    <NavigationProperty Name="LendingCode" Relationship="Self.LendingCodeID" FromRole="LendingRecord" ToRole="LendingCode" />
+    <NavigationProperty Name="ReparationRecord" Relationship="Self.FK_ReparationRecord_LendingRecord" FromRole="LendingRecord" ToRole="ReparationRecord" />
+    <NavigationProperty Name="ViolationRecord" Relationship="Self.LendingRecordID" FromRole="LendingRecord" ToRole="ViolationRecord" />
+    <NavigationProperty Name="LibraryCard" Relationship="Self.LibraryCardID" FromRole="LendingRecord" ToRole="LibraryCard" />
+  </EntityType>
+  <EntityType Name="Library">
+    <Key>
+      <PropertyRef Name="LibraryID" />
+    </Key>
+    <Property Name="LibraryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LibraryName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="LibraryAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LendingCode" Relationship="Self.LibraryID" FromRole="Library" ToRole="LendingCode" />
+  </EntityType>
+  <EntityType Name="LibraryBook">
+    <Key>
+      <PropertyRef Name="LibraryBookID" />
+    </Key>
+    <Property Name="LibraryBookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="BookAuthor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="BookPress" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ISBN" Type="Int32" />
+    <Property Name="Page" Type="Int32" />
+    <Property Name="ClassificationID" Type="Int32" />
+    <Property Name="TypeID" Type="Int32" />
+    <NavigationProperty Name="BookType" Relationship="Self.TypeID" FromRole="LibraryBook" ToRole="BookType" />
+    <NavigationProperty Name="Classification" Relationship="Self.ClassificationID" FromRole="LibraryBook" ToRole="Classification" />
+    <NavigationProperty Name="LendingCode" Relationship="Self.LibraryBookID" FromRole="LibraryBook" ToRole="LendingCode" />
+  </EntityType>
+  <EntityType Name="LibraryCard">
+    <Key>
+      <PropertyRef Name="LibraryCardID" />
+    </Key>
+    <Property Name="LibraryCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateLicensing" Type="DateTime" Precision="0" />
+    <Property Name="CancellationDate" Type="DateTime" Precision="0" />
+    <Property Name="ReaderID" Type="Int32" />
+    <NavigationProperty Name="LendingRecord" Relationship="Self.LibraryCardID" FromRole="LibraryCard" ToRole="LendingRecord" />
+    <NavigationProperty Name="Reader" Relationship="Self.ReaderID" FromRole="LibraryCard" ToRole="Reader" />
+  </EntityType>
+  <EntityType Name="Reader">
+    <Key>
+      <PropertyRef Name="ReaderID" />
+    </Key>
+    <Property Name="ReaderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReaderName" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="ReaderBirthday" Type="DateTime" Precision="0" />
+    <Property Name="ReaderAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ReaderSex" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="ReaderPhone" Type="Int32" />
+    <Property Name="ReaderEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ReaderAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReaderPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LibraryCard" Relationship="Self.ReaderID" FromRole="Reader" ToRole="LibraryCard" />
+    <NavigationProperty Name="ReservationRecord" Relationship="Self.FK_ReservationRecord_Reader1" FromRole="Reader" ToRole="ReservationRecord" />
+  </EntityType>
+  <EntityType Name="ReparationRecord">
+    <Key>
+      <PropertyRef Name="ReparationRecordID" />
+    </Key>
+    <Property Name="ReparationRecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReparationReason" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ReparationMoney" Type="Int32" />
+    <Property Name="PayTime" Type="DateTime" Precision="0" />
+    <Property Name="LendingRecordID" Type="Int32" />
+    <NavigationProperty Name="LendingRecord" Relationship="Self.FK_ReparationRecord_LendingRecord" FromRole="ReparationRecord" ToRole="LendingRecord" />
+  </EntityType>
+  <EntityType Name="ReservationRecord">
+    <Key>
+      <PropertyRef Name="ReservationRecordID" />
+    </Key>
+    <Property Name="ReservationRecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationTime" Type="DateTime" Precision="0" />
+    <Property Name="TakeTime" Type="DateTime" Precision="0" />
+    <Property Name="LendingCodeID" Type="Int32" Nullable="false" />
+    <Property Name="ReaderID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AppointmentViolation" Relationship="Self.ReservationRecordID" FromRole="ReservationRecord" ToRole="AppointmentViolation" />
+    <NavigationProperty Name="LendingCode" Relationship="Self.FK_ReservationRecord_LendingCode" FromRole="ReservationRecord" ToRole="LendingCode" />
+    <NavigationProperty Name="Reader" Relationship="Self.FK_ReservationRecord_Reader1" FromRole="ReservationRecord" ToRole="Reader" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ViolationRecord">
+    <Key>
+      <PropertyRef Name="ViolationID" />
+    </Key>
+    <Property Name="ViolationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ViolationDay" Type="Int32" />
+    <Property Name="Violationdate" Type="DateTime" Precision="0" />
+    <Property Name="LendingRecordID" Type="Int32" />
+    <NavigationProperty Name="LendingRecord" Relationship="Self.LendingRecordID" FromRole="ViolationRecord" ToRole="LendingRecord" />
+  </EntityType>
+  <Association Name="ReservationRecordID">
+    <End Role="ReservationRecord" Type="Self.ReservationRecord" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AppointmentViolation" Type="Self.AppointmentViolation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservationRecord">
+        <PropertyRef Name="ReservationRecordID" />
+      </Principal>
+      <Dependent Role="AppointmentViolation">
+        <PropertyRef Name="ReservationRecordID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TypeID">
+    <End Role="BookType" Type="Self.BookType" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="LibraryBook">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassificationID">
+    <End Role="Classification" Type="Self.Classification" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classification">
+        <PropertyRef Name="ClassificationID" />
+      </Principal>
+      <Dependent Role="LibraryBook">
+        <PropertyRef Name="ClassificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationRecord_LendingCode">
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="1" />
+    <End Role="ReservationRecord" Type="Self.ReservationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingCode">
+        <PropertyRef Name="LendingCodeID" />
+      </Principal>
+      <Dependent Role="ReservationRecord">
+        <PropertyRef Name="LendingCodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LendingCodeID">
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingCode">
+        <PropertyRef Name="LendingCodeID" />
+      </Principal>
+      <Dependent Role="LendingRecord">
+        <PropertyRef Name="LendingCodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryBookID">
+    <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LibraryBook">
+        <PropertyRef Name="LibraryBookID" />
+      </Principal>
+      <Dependent Role="LendingCode">
+        <PropertyRef Name="LibraryBookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryID">
+    <End Role="Library" Type="Self.Library" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingCode" Type="Self.LendingCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Library">
+        <PropertyRef Name="LibraryID" />
+      </Principal>
+      <Dependent Role="LendingCode">
+        <PropertyRef Name="LibraryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReparationRecord_LendingRecord">
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="0..1" />
+    <End Role="ReparationRecord" Type="Self.ReparationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Principal>
+      <Dependent Role="ReparationRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LendingRecordID">
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ViolationRecord" Type="Self.ViolationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LendingRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Principal>
+      <Dependent Role="ViolationRecord">
+        <PropertyRef Name="LendingRecordID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LibraryCardID">
+    <End Role="LibraryCard" Type="Self.LibraryCard" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LendingRecord" Type="Self.LendingRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LibraryCard">
+        <PropertyRef Name="LibraryCardID" />
+      </Principal>
+      <Dependent Role="LendingRecord">
+        <PropertyRef Name="LibraryCardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReaderID">
+    <End Role="Reader" Type="Self.Reader" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LibraryCard" Type="Self.LibraryCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reader">
+        <PropertyRef Name="ReaderID" />
+      </Principal>
+      <Dependent Role="LibraryCard">
+        <PropertyRef Name="ReaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReservationRecord_Reader1">
+    <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+    <End Role="ReservationRecord" Type="Self.ReservationRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reader">
+        <PropertyRef Name="ReaderID" />
+      </Principal>
+      <Dependent Role="ReservationRecord">
+        <PropertyRef Name="ReaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AppointmentViolation" EntityType="Self.AppointmentViolation" />
+    <EntitySet Name="BookType" EntityType="Self.BookType" />
+    <EntitySet Name="Classification" EntityType="Self.Classification" />
+    <EntitySet Name="LendingCode" EntityType="Self.LendingCode" />
+    <EntitySet Name="LendingRecord" EntityType="Self.LendingRecord" />
+    <EntitySet Name="Library" EntityType="Self.Library" />
+    <EntitySet Name="LibraryBook" EntityType="Self.LibraryBook" />
+    <EntitySet Name="LibraryCard" EntityType="Self.LibraryCard" />
+    <EntitySet Name="Reader" EntityType="Self.Reader" />
+    <EntitySet Name="ReparationRecord" EntityType="Self.ReparationRecord" />
+    <EntitySet Name="ReservationRecord" EntityType="Self.ReservationRecord" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="ViolationRecord" EntityType="Self.ViolationRecord" />
+    <AssociationSet Name="ReservationRecordID" Association="Self.ReservationRecordID">
+      <End Role="ReservationRecord" EntitySet="ReservationRecord" />
+      <End Role="AppointmentViolation" EntitySet="AppointmentViolation" />
+    </AssociationSet>
+    <AssociationSet Name="TypeID" Association="Self.TypeID">
+      <End Role="BookType" EntitySet="BookType" />
+      <End Role="LibraryBook" EntitySet="LibraryBook" />
+    </AssociationSet>
+    <AssociationSet Name="ClassificationID" Association="Self.ClassificationID">
+      <End Role="Classification" EntitySet="Classification" />
+      <End Role="LibraryBook" EntitySet="LibraryBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationRecord_LendingCode" Association="Self.FK_ReservationRecord_LendingCode">
+      <End Role="LendingCode" EntitySet="LendingCode" />
+      <End Role="ReservationRecord" EntitySet="ReservationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LendingCodeID" Association="Self.LendingCodeID">
+      <End Role="LendingCode" EntitySet="LendingCode" />
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryBookID" Association="Self.LibraryBookID">
+      <End Role="LibraryBook" EntitySet="LibraryBook" />
+      <End Role="LendingCode" EntitySet="LendingCode" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryID" Association="Self.LibraryID">
+      <End Role="Library" EntitySet="Library" />
+      <End Role="LendingCode" EntitySet="LendingCode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReparationRecord_LendingRecord" Association="Self.FK_ReparationRecord_LendingRecord">
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+      <End Role="ReparationRecord" EntitySet="ReparationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LendingRecordID" Association="Self.LendingRecordID">
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+      <End Role="ViolationRecord" EntitySet="ViolationRecord" />
+    </AssociationSet>
+    <AssociationSet Name="LibraryCardID" Association="Self.LibraryCardID">
+      <End Role="LibraryCard" EntitySet="LibraryCard" />
+      <End Role="LendingRecord" EntitySet="LendingRecord" />
+    </AssociationSet>
+    <AssociationSet Name="ReaderID" Association="Self.ReaderID">
+      <End Role="Reader" EntitySet="Reader" />
+      <End Role="LibraryCard" EntitySet="LibraryCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservationRecord_Reader1" Association="Self.FK_ReservationRecord_Reader1">
+      <End Role="Reader" EntitySet="Reader" />
+      <End Role="ReservationRecord" EntitySet="ReservationRecord" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

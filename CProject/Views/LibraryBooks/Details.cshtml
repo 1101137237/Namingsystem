@@ -1,0 +1,74 @@
+﻿@model CProject.Models.LibraryBook
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LibraryBook</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookAuthor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookAuthor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookPress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookPress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Page)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Page)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookType.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookType.TypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Classification.ClassificationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Classification.ClassificationName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LibraryBookID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
